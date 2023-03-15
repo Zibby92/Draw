@@ -1,30 +1,49 @@
 import java.util.Scanner;
 
 public class Main {
+    static Scanner scanner = new Scanner(System.in);
+
     private final String square = "square";
     private final String rectangle = "rectangle";
     private final String three = "three";
+
     public static void main(String[] args) {
-        var scanner = new Scanner(System.in);
+        Drawable chose;
+        do {
+            chose = chosen();
+        }while(chosen()==null);
+        chose.draw();
+    }
+
+    private static Drawable three() {
+        System.out.println("jaka wysokość?");
+        return new Tree(scanner.nextInt());
+    }
+
+    private static Drawable rectagle() {
+        System.out.println("jaka dlugość ścian?");
+        return new Rectangle(scanner.nextInt(), scanner.nextInt());
+    }
+
+    private static Drawable square() {
+        System.out.println("jaka dlugość ściany?");
+        return new Square(scanner.nextInt());
+    }
+
+    private static Drawable chosen() {
         System.out.println("Co chcesz narysować ? square/rectangle/tree");
         String chose = scanner.nextLine();
         switch (chose) {
-            case "square":{
-                System.out.println("jaka dlugość ściany?");
-                 Drawable square = new Square(scanner.nextInt());
-                 square.draw();
-            }
-            case "rectangule":{
-                System.out.println("jaka dlugość ścian?");
-                Drawable rectangle = new Rectangle(scanner.nextInt(),scanner.nextInt());
-                rectangle.draw();
-            }
-            case "three":{
-                System.out.println("jaka wysokość?");
-                Drawable three = new Tree(scanner.nextInt());
-                three.draw();
+            case "square":
+                return square();
+            case "rectangule":
+                return rectagle();
+            case "three":
+                return three();
+            default: {
+                System.out.println("niewlasciwa komenda");
+                return null;
             }
         }
     }
-    void
 }
